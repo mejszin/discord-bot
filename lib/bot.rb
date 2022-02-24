@@ -11,31 +11,20 @@ require './lib/objects/task_controller.rb'
 require './lib/objects/project.rb'
 require './lib/objects/project_controller.rb'
 
-DISCORD_TOKEN = File.read('./discord_token')
-DISCORD_CLIENT_ID = File.read('./discord_client_id')
-SPOTIFY_CLIENT_ID = File.read('./spotify_client_id')
-SPOTIFY_CLIENT_SECRET = File.read('./spotify_client_secret')
+DISCORD_TOKEN = File.read('./discord_token').chomp
+DISCORD_CLIENT_ID = File.read('./discord_client_id').chomp
+SPOTIFY_CLIENT_ID = File.read('./spotify_client_id').chomp
+SPOTIFY_CLIENT_SECRET = File.read('./spotify_client_secret').chomp
 
 puts "DISCORD_TOKEN=#{DISCORD_TOKEN}"
 puts "DISCORD_CLIENT_ID=#{DISCORD_CLIENT_ID}"
 puts "SPOTIFY_CLIENT_ID=#{SPOTIFY_CLIENT_ID}"
 puts "SPOTIFY_CLIENT_SECRET=#{SPOTIFY_CLIENT_SECRET}"
 
-def format_success(str)
-    return "```diff\n+ #{str}\n```"
-end
-
-def format_error(str)
-    return "```diff\n- #{str}\n```"
-end
-
-def format_standard(str)
-    return "```\n#{str}\n```"
-end
-
-def format_usage(str)
-    return "Command usage: ``#{str}``"
-end
+def format_standard(str); return "```\n#{str}\n```"; end
+def format_success(str); return "```diff\n+ #{str}\n```"; end
+def format_error(str); return "```diff\n- #{str}\n```"; end
+def format_usage(str); return "Command usage: ``#{str}``"; end
 
 $bot = Discordrb::Bot.new(token: DISCORD_TOKEN, client_id: DISCORD_CLIENT_ID)
 
