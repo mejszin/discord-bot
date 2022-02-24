@@ -2,15 +2,14 @@ $bot.message(start_with: '~projects') do |event|
     message = []
     for project in ProjectController.new.projects do
         if project.active?
-            message << "Owner   : #{project.owner_name(event.server)}"
-            message << "Project : #{project.title}"
-            message << "URL     : #{project.url}"
-            message << "Desc    : #{project.desc}"
-            message << "Members : #{project.member_names(event.server).join(", ")}"
-            message << ""
+            message = ["= #{project.title} ="]
+            message << "Owner   :: #{project.owner_name(event.server)}"
+            message << "URL     :: #{project.url}"
+            message << "Desc    :: #{project.desc}"
+            message << "Members :: #{project.member_names(event.server).join(", ")}"
+            event.respond ["```asciidoc", message, "```"].flatten.join("\n")
         end
     end
-    event.respond ["```", message, "```"].flatten.join("\n")
 end
 
 
