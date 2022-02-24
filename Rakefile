@@ -32,6 +32,7 @@ task :project_test do
     require 'bundler'
     Bundler.setup(:default, :ci)
 
+    require './lib/objects/task.rb'
     require './lib/objects/task_controller.rb'
     require './lib/objects/project.rb'
     require './lib/objects/project_controller.rb'

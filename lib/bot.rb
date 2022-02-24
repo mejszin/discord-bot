@@ -6,6 +6,7 @@ require 'discordrb' # https://www.rubydoc.info/gems/discordrb/3.2.1/
 require 'rspotify' # https://www.rubydoc.info/github/guilhermesad/rspotify/
 
 require './lib/api/spotify.rb'
+require './lib/objects/task.rb'
 require './lib/objects/task_controller.rb'
 require './lib/objects/project.rb'
 require './lib/objects/project_controller.rb'
