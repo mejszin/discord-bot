@@ -30,7 +30,7 @@ $bot.message(start_with: '~project-task-progress') do |event|
             end
             event.respond ["```", message, "```"].flatten.join("\n")
         else
-            event.respond "Could not find project!"
+            event.respond "``Could not find project!``"
         end
         #result = ProjectController.new.add_project(owner, title, desc, url)
         #event.respond result ? "``Added project!``" : "``Could not add project!``"
@@ -53,7 +53,7 @@ $bot.message(start_with: '~project-tasks') do |event|
                 event.respond message.flatten.join("\n")
             end
         else
-            event.respond "Could not find project!"
+            event.respond "``Could not find project!``"
         end
         #result = ProjectController.new.add_project(owner, title, desc, url)
         #event.respond result ? "``Added project!``" : "``Could not add project!``"
