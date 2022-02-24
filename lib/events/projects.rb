@@ -13,7 +13,8 @@ $bot.message(start_with: '~projects') do |event|
     event.respond ["```", message, "```"].flatten.join("\n")
 end
 
-$bot.message(start_with: '~project-tasks') do |event|
+
+$bot.message(start_with: '~project-progress') do |event|
     words = event.content.split(" ")
     if words.length == 2
         project = ProjectController.new.find_project(words[1])
@@ -29,9 +30,24 @@ $bot.message(start_with: '~project-tasks') do |event|
                 message << category.ljust(16, " ") + progress_bar + " " + percent
             end
             event.respond ["```", message, "```"].flatten.join("\n")
+        else
+            event.respond "Could not find project!"
+        end
+        #result = ProjectController.new.add_project(owner, title, desc, url)
+        #event.respond result ? "``Added project!``" : "``Could not add project!``"
+    else
+        event.respond "Command usage: ``~project-progress <title>``"
+    end
+end
+
+$bot.message(start_with: '~project-tasks') do |event|
+    words = event.content.split(" ")
+    if words.length == 2
+        project = ProjectController.new.find_project(words[1])
+        if (project != nil) && project.active?
             # Task list
             for category, tasks in project.task_controller.tasks do
-                message = ["#{category} tasks:"]
+                message = ["**#{category} tasks:**"]
                 for task in tasks do
                     message << "#{task.checkbox} ``#{task.index}`` #{task.desc}"
                 end
