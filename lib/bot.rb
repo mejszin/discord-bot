@@ -29,7 +29,7 @@ require './lib/events/spotify.rb'
 require './lib/events/miscellaneous.rb'
 
 $bot.message(start_with: '~test') do |event|
-    event.respond event.message.content.chars.inspect
+    event.respond event.server.emoji.inspect
 end
 
 $bot.run

@@ -47,31 +47,37 @@ class ProjectController
     def set_project_status(user_id, title, status)
         project = find_project(title)
         return false if project == nil
-        if project.owner?(user_id)
-            result = project.set_status(status)
-            write_to_file if result == true
-            return result
-        end
+        return false unless project.owner?(user_id)
+        result = project.set_status(status)
+        write_to_file if result == true
+        return result
     end
 
     def add_task_category(user_id, title, category)
         project = find_project(title)
         return false if project == nil
-        if project.member?(user_id)
-            result = project.add_task_category(category)
-            write_to_file if result == true
-            return result
-        end
+        return false unless project.member?(user_id)
+        result = project.add_task_category(category)
+        write_to_file if result == true
+        return result
     end
 
     def add_task(user_id, title, category, desc)
         project = find_project(title)
         return false if project == nil
-        if project.member?(user_id)
-            result = project.add_task(category, desc)
-            write_to_file if result == true
-            return result
-        end
+        return false unless project.member?(user_id)
+        result = project.add_task(category, desc)
+        write_to_file if result == true
+        return result
+    end
+
+    def complete_task(user_id, title, category, index)
+        project = find_project(title)
+        return false if project == nil
+        return false unless project.member?(user_id)
+        result = project.complete_task(category, index)
+        write_to_file if result == true
+        return result
     end
 end
 

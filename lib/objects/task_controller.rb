@@ -10,6 +10,12 @@ class TaskController
         end
     end
 
+    def find_task(category, index)
+        return nil unless category?(category)
+        @tasks[category].each { |task| return task if task.index?(index) }
+        return nil
+    end
+
     def category?(category)
         return @tasks.key?(category)
     end
@@ -28,13 +34,19 @@ class TaskController
         return true
     end
 
+    def complete_task(category, index)
+        task = find_task(category, index)
+        return false if task == nil
+        return task.complete
+    end
+
     def percent_complete(category = nil)
         # Calculate overall percentage complete if no category given
         unless category == nil
-            count = @tasks[category].count { |task| task.complete }
+            count = @tasks[category].count { |task| task.complete? }
             total = @tasks[category].length
         else
-            count = @tasks.map { |cat, tasks| tasks.count { |task| task.complete } }.sum
+            count = @tasks.map { |cat, tasks| tasks.count { |task| task.complete? } }.sum
             total = @tasks.map { |cat, tasks| tasks.length }.sum
         end
         return ((count.to_f / total.to_f) * 100).round

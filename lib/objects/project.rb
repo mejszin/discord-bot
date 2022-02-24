@@ -73,6 +73,10 @@ class Project
         return @task_controller.add_task(category, desc)
     end
 
+    def complete_task(category, index)
+        return @task_controller.complete_task(category, index)
+    end
+
     def to_json
         return {
             "owner" => @owner,

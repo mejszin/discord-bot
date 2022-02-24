@@ -85,6 +85,17 @@ $bot.message(start_with: '~project-task-add') do |event|
     end
 end
 
+$bot.message(start_with: '~project-task-complete') do |event|
+    words = event.content.split(" ")
+    if words.length == 4
+        user_id, title, category, index = event.message.user.id.to_s, words[1], words[2], words[3]
+        result = ProjectController.new.complete_task(user_id, title, category, index)
+        event.respond result ? "``Completed task!``" : "``Could not complete task!``"
+    else
+        event.respond "Command usage: ``~project-task-complete <title> <category> <index>``"
+    end
+end
+
 $bot.message(start_with: '~project-add') do |event|
     words = event.content.split(" ")
     if words.length > 2
