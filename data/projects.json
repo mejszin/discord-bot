@@ -29,6 +29,20 @@
                     "desc": "Write up a solid USP",
                     "complete": false
                 }
+            ],
+            "random": [
+                {
+                    "desc": "This is a test task",
+                    "complete": true
+                },
+                {
+                    "desc": "This is a second test task",
+                    "complete": false
+                },
+                {
+                    "desc": "This is a third test task",
+                    "complete": false
+                }
             ]
         }
     },
@@ -40,6 +54,7 @@
         "status": true,
         "members": [
             "318742552545067009"
-        ]
+        ],
+        "tasks": {}
     }
 ]

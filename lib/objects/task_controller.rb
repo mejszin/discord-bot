@@ -15,16 +15,31 @@ class TaskController
     end
 
     def add_category(category)
+        return false if category?(category)
         @tasks[category] = []
+        return true
     end
 
-    def percent_complete(category)
-        count = @tasks[category].count { |task| task.complete }
-        total = @tasks[category].length
+    def add_task(category, desc)
+        return false unless category?(category)
+        index = @tasks[category].length
+        data = { "desc" => desc, "complete" => false }
+        @tasks[category] << Task.new(index, data)
+        return true
+    end
+
+    def percent_complete(category = nil)
+        unless category == nil
+            count = @tasks[category].count { |task| task.complete }
+            total = @tasks[category].length
+        else
+            count = @tasks.map { |cat, tasks| tasks.count { |task| task.complete } }.sum
+            total = @tasks.map { |cat, tasks| tasks.length }.sum
+        end
         return ((count.to_f / total.to_f) * 100).round
     end
 
-    def progress_bar(category)
+    def progress_bar(category = nil)
         percent, fidelity = percent_complete(category), 20
         segments = (percent * (fidelity.to_f / 100)).floor
         return "[" + ("#" * segments) + (" " * (fidelity - segments)) + "]"
@@ -33,10 +48,7 @@ class TaskController
     def to_json
         hash = {}
         for category, tasks in @tasks do
-            hash[category] = []
-            for task in tasks do
-                hash[category] << task.to_json
-            end
+            hash[category] = tasks.map { |task| task.to_json }
         end
         return hash
     end

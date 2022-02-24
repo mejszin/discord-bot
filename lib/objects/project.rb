@@ -12,7 +12,7 @@ class Project
         @task_controller = TaskController.new(data.key?("tasks") ? data["tasks"] : {})
     end
 
-    def active
+    def active?
         return status
     end
 
@@ -66,8 +66,11 @@ class Project
     end
 
     def add_task_category(category)
-        return false if @task_controller.category?(category)
         return @task_controller.add_category(category)
+    end
+
+    def add_task(category, desc)
+        return @task_controller.add_task(category, desc)
     end
 
     def to_json

@@ -6,6 +6,14 @@ class Task
         @desc, @complete = data["desc"], data["complete"]
     end
 
+    def complete?
+        return @complete
+    end
+
+    def checkbox
+        return @complete ? "[X]" : "[ ]"
+    end
+
     def to_json
         return {
             "desc" => @desc,

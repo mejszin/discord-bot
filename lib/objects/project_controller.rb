@@ -21,6 +21,11 @@ class ProjectController
         end
     end
 
+    def find_project(title)
+        @projects.each { |project| return project if project.title?(title) }
+        return nil
+    end
+
     def add_project(owner, title, desc, url)
         data = { "owner" => owner, "title" => title, "desc" => desc, "url" => url }
         @projects << Project.new(data)
@@ -28,33 +33,45 @@ class ProjectController
     end
 
     def add_project_member(user_id, title)
-        for project in @projects do
-            return project.add_member(user_id) if project.title?(title)
-        end
-        return false
+        project = find_project(title)
+        return false if project == nil
+        return project.add_member(user_id)
     end
 
     def remove_project_member(user_id, title)
-        for project in @projects do
-            return project.remove_member(user_id) if project.title?(title)
-        end
-        return false
+        project = find_project(title)
+        return false if project == nil
+        return project.remove_member(user_id)
     end
 
     def set_project_status(user_id, title, status)
-        for project in @projects do
-            return project.set_status(status) if project.owner?(user_id) && project.title?(title)
+        project = find_project(title)
+        return false if project == nil
+        if project.owner?(user_id)
+            result = project.set_status(status)
+            write_to_file if result == true
+            return result
         end
-        return false
     end
 
     def add_task_category(user_id, title, category)
-        for project in @projects do
-            if (project.member?(user_id)) && (title == project.title)
-                return project.add_task_category(category)
-            end
+        project = find_project(title)
+        return false if project == nil
+        if project.member?(user_id)
+            result = project.add_task_category(category)
+            write_to_file if result == true
+            return result
         end
-        return false
+    end
+
+    def add_task(user_id, title, category, desc)
+        project = find_project(title)
+        return false if project == nil
+        if project.member?(user_id)
+            result = project.add_task(category, desc)
+            write_to_file if result == true
+            return result
+        end
     end
 end
 
