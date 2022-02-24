@@ -1,1 +1,67 @@
-[{"owner":"472499883035852801","title":"haedi","desc":"An example project","url":"haedi.org","status":true,"members":["472499883035852801","318742552545067009","934492432828084284"],"tasks":{"general":[{"desc":"This is an example task","complete":true},{"desc":"This is another example task","complete":true},{"desc":"Finish your documentation","complete":false}]}},{"owner":"318742552545067009","title":"AISnake","desc":"a snake app that can play itself","url":"bandicum.com","status":true,"members":["318742552545067009"],"tasks":{}}]
+[
+    {
+        "owner": "472499883035852801",
+        "title": "haedi",
+        "desc": "An example project",
+        "url": "haedi.org",
+        "status": true,
+        "members": [
+            "472499883035852801",
+            "318742552545067009",
+            "934492432828084284"
+        ],
+        "tasks": {
+            "general": [
+                {
+                    "desc": "This is an example task",
+                    "complete": true
+                },
+                {
+                    "desc": "This is another example task",
+                    "complete": true
+                },
+                {
+                    "desc": "Finish your documentation",
+                    "complete": false
+                }
+            ],
+            "test": []
+        }
+    },
+    {
+        "owner": "318742552545067009",
+        "title": "AISnake",
+        "desc": "a snake app that can play itself",
+        "url": "bandicum.com",
+        "status": true,
+        "members": [
+            "318742552545067009"
+        ],
+        "tasks": {}
+    },
+    {
+        "owner": "472499883035852801",
+        "title": "discord-bot",
+        "desc": "Custom coworking bot",
+        "url": "https://github.com/mejszin/discord-bot",
+        "status": true,
+        "members": [
+            "472499883035852801",
+            "318742552545067009"
+        ],
+        "tasks": {
+            "projects": [
+                {
+                    "desc": "Create guide/documentation and flesh out the specs",
+                    "complete": false
+                }
+            ],
+            "misc": [
+                {
+                    "desc": "Add random idea prompt command for projects/code challenges/hackathons",
+                    "complete": false
+                }
+            ]
+        }
+    }
+]

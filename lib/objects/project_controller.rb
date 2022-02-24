@@ -30,6 +30,7 @@ class ProjectController
         data = { "owner" => owner, "title" => title, "desc" => desc, "url" => url }
         @projects << Project.new(data)
         write_to_file
+        return true
     end
 
     def add_project_member(user_id, title)

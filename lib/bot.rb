@@ -29,6 +29,10 @@ def format_error(str)
     return "```diff\n- #{str}\n```"
 end
 
+def format_standard(str)
+    return "```\n#{str}\n```"
+end
+
 def format_usage(str)
     return "Command usage: ``#{str}``"
 end

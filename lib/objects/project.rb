@@ -88,7 +88,7 @@ class Project
     end
 
     def remove_task(category, index = nil)
-        return @task_controller.remove_task(category, index = nil)
+        return @task_controller.remove_task(category, index)
     end
 
     def complete_task(category, index)

@@ -46,13 +46,17 @@ $bot.message(start_with: '~project-tasks') do |event|
     if words.length == 2
         project = ProjectController.new.find_project(words[1])
         if (project != nil) && project.active?
-            # Task list
-            for category, tasks in project.task_controller.tasks do
-                message = ["**#{category} tasks:**"]
-                for task in tasks do
-                    message << "#{task.checkbox} ``#{task.index}`` #{task.desc}"
+            if project.has_tasks?
+                # Task list
+                for category, tasks in project.task_controller.tasks do
+                    message = ["**#{category} tasks:**"]
+                    for task in tasks do
+                        message << "#{task.checkbox} ``#{task.index}`` #{task.desc}"
+                    end
+                    event.respond message.flatten.join("\n")
                 end
-                event.respond message.flatten.join("\n")
+            else
+                event.respond format_standard("This project has no tasks!")
             end
         else
             event.respond format_error("Could not find project!")
@@ -133,7 +137,7 @@ end
 $bot.message(start_with: '~project-add') do |event|
     words = event.content.split(" ")
     if words.length > 2
-        owner, url, title, desc = event.message.user.id, words[1], words[2], words[3..-1].join(" ")
+        owner, url, title, desc = event.message.user.id.to_s, words[1], words[2], words[3..-1].join(" ")
         result = ProjectController.new.add_project(owner, title, desc, url)
         event.respond result ? format_success("Added project!") : format_error("Could not add project!")
     else
