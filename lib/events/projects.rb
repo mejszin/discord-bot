@@ -14,7 +14,7 @@ $bot.message(start_with: '~projects') do |event|
 end
 
 
-$bot.message(start_with: '~project-progress') do |event|
+$bot.message(start_with: '~project-task-progress') do |event|
     words = event.content.split(" ")
     if words.length == 2
         project = ProjectController.new.find_project(words[1])
@@ -36,7 +36,7 @@ $bot.message(start_with: '~project-progress') do |event|
         #result = ProjectController.new.add_project(owner, title, desc, url)
         #event.respond result ? "``Added project!``" : "``Could not add project!``"
     else
-        event.respond "Command usage: ``~project-progress <title>``"
+        event.respond "Command usage: ``~project-task-progress <title>``"
     end
 end
 
@@ -81,7 +81,7 @@ $bot.message(start_with: '~project-task-add') do |event|
         result = ProjectController.new.add_task(user_id, title, category, desc)
         event.respond result ? "``Added task!``" : "``Could not add task!``"
     else
-        event.respond "Command usage: ``~project-task-category-add <title> <category>``"
+        event.respond "Command usage: ``~project-task-add <title> <category> <desc>``"
     end
 end
 

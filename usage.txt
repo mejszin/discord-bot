@@ -1,23 +1,51 @@
-✧･ﾟ* Projects (in-development) ✧･ﾟ*
+# Projects (in-development)
 
-~projects                         :: List active community projects
-~project-add <url> <title> <desc> :: Add a new project
-                                  :: (title cannot contain spaces)
-~project-disable <title>          :: Disable your project
-~project-enable <title>           :: Enable your project
-~project-join <title>             :: Join a project
-~project-leave <title>            :: Leave a project
+> List active community projects
+~projects
+> Add a new project (title cannot contain spaces)
+~project-add <url> <title> <description>
+> Disable your project (you can re-enable later)
+~project-disable <title>
+> Enable your project
+~project-enable <title>
+> Join a project
+~project-join <title>             
+> Leave a project
+~project-leave <title>
 
-✧･ﾟ* Spotify Commands ✧･ﾟ*
+# Project tasks (in-development)
 
-~spotify <query|url>      :: Formatted track message
-~spotify-info <query|url> :: Formatted track message with extra info
-~spotify-genres           :: List of available genres for suggestions
-~spotify-suggest <genres> :: Search for 3 random suggestions by genres
-~spotify-gamut            :: Print the energy emojis
+> List all current tasks for a project
+~project-tasks <title>
+> Display progress bars for task categories
+~project-task-progress <title>
+> Add a new task category (category cannot contain spaces)
+~project-task-category-add <title> <category>
+> Add a new task to a category
+~project-task-add <title> <category> <description>
+> Remove a task
+~project-task-remove <title> <category> <index>
+> Complete a task
+~project-task-complete <title> <category> <index>
 
-✧･ﾟ* Miscellaneous ✧･ﾟ*
+# Spotify
 
-~quote  :: Random quote
-~sadcat :: Random sad cat picture
-~lofi   :: Random lo-fi aesthetic picture
+> Show a track message
+~spotify <query>
+> Show a track message with more information
+~spotify-info <query>
+> List of available genres for suggestions
+~spotify-genres
+> Search for 3 random suggestions by genres
+~spotify-suggest <genres>
+> Show all the emojis used to show energy level
+~spotify-gamut
+
+# Miscellaneous
+
+> Show a random quote
+~quote
+> Show a random sad cat picture
+~sadcat
+> Show a random lo-fi aesthetic picture
+~lofi  
