@@ -26,6 +26,12 @@ class TaskController
         return true
     end
 
+    def remove_category(category)
+        return false unless category?(category)
+        @tasks.delete(category)
+        return true
+    end
+
     def add_task(category, desc)
         return false unless category?(category)
         index = @tasks[category].length
@@ -34,10 +40,14 @@ class TaskController
         return true
     end
 
-    def remove_task(category, index)
-        task = find_task(category, index)
-        return false if task == nil
-        @tasks[category] -= [task]
+    def remove_task(category, index = nil)
+        unless index == nil
+            task = find_task(category, index)
+            return false if task == nil
+            @tasks[category] -= [task]
+        else
+            @tasks[category] = []
+        end
         return true
     end
 

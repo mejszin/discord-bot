@@ -75,6 +75,28 @@ $bot.message(start_with: '~project-task-category-add') do |event|
     end
 end
 
+$bot.message(start_with: '~project-task-category-remove') do |event|
+    words = event.content.split(" ")
+    if words.length == 3
+        user_id, title, category = event.message.user.id.to_s, words[1], words[2]
+        result = ProjectController.new.remove_task_category(user_id, title, category)
+        event.respond result ? format_success("Removed task category!") : format_error("Could not remove task category!")
+    else
+        event.respond format_usage("~project-task-category-remove <title> <category>")
+    end
+end
+
+$bot.message(start_with: '~project-task-category-clear') do |event|
+    words = event.content.split(" ")
+    if words.length == 3
+        user_id, title, category = event.message.user.id.to_s, words[1], words[2]
+        result = ProjectController.new.remove_task(user_id, title, category)
+        event.respond result ? format_success("Cleared task category!") : format_error("Could not clear task category!")
+    else
+        event.respond format_usage("~project-task-category-clear <title> <category>")
+    end
+end
+
 $bot.message(start_with: '~project-task-add') do |event|
     words = event.content.split(" ")
     if words.length > 3

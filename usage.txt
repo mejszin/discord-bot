@@ -21,6 +21,10 @@
 ~project-task-progress <title>
 > Add a new task category (category cannot contain spaces)
 ~project-task-category-add <title> <category>
+> Remove an existing task category
+~project-task-category-remove <title> <category>
+> Remove all tasks from category
+~project-task-category-clear <title> <category>
 > Add a new task to a category
 ~project-task-add <title> <category> <description>
 > Remove a task

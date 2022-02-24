@@ -79,12 +79,16 @@ class Project
         return @task_controller.add_category(category)
     end
 
+    def remove_task_category(category)
+        return @task_controller.remove_category(category)
+    end
+
     def add_task(category, desc)
         return @task_controller.add_task(category, desc)
     end
 
-    def remove_task(category, index)
-        return @task_controller.remove_task(category, index)
+    def remove_task(category, index = nil)
+        return @task_controller.remove_task(category, index = nil)
     end
 
     def complete_task(category, index)
