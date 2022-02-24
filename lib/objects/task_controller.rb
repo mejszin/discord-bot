@@ -40,10 +40,18 @@ class TaskController
         return ((count.to_f / total.to_f) * 100).round
     end
 
+    # https://changaco.oy.lc/unicode-progress-bars/
+
     def progress_bar(category = nil)
-        percent, fidelity = percent_complete(category), 20
+        # Styling variables
+        solid_bar = "▮" # "▰"
+        empty_bar = "▯" # "▱"
+        bar_padding = ""
+        fidelity = 20
+        # Build progress bar
+        percent = percent_complete(category)
         segments = (percent * (fidelity.to_f / 100)).floor
-        return "[" + ("#" * segments) + (" " * (fidelity - segments)) + "]"
+        return ([solid_bar] * segments + [empty_bar] * (fidelity - segments)).join(bar_padding)
     end
 
     def to_json
