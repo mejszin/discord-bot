@@ -21,6 +21,18 @@ puts "DISCORD_CLIENT_ID=#{DISCORD_CLIENT_ID}"
 puts "SPOTIFY_CLIENT_ID=#{SPOTIFY_CLIENT_ID}"
 puts "SPOTIFY_CLIENT_SECRET=#{SPOTIFY_CLIENT_SECRET}"
 
+def format_success(str)
+    return "```diff\n+ #{str}\n```"
+end
+
+def format_error(str)
+    return "```diff\n- #{str}\n```"
+end
+
+def format_usage(str)
+    return "Command usage: ``#{str}``"
+end
+
 $bot = Discordrb::Bot.new(token: DISCORD_TOKEN, client_id: DISCORD_CLIENT_ID)
 
 require './lib/events/help.rb'
@@ -29,7 +41,10 @@ require './lib/events/spotify.rb'
 require './lib/events/miscellaneous.rb'
 
 $bot.message(start_with: '~test') do |event|
-    event.respond event.server.emoji.inspect
+    #member = event.message.user.on(event.server)
+    #event.respond member.status.inspect
+    #event.respond event.message.user.status.inspect
+    #event.respond event.server.online_members.inspect
 end
 
 $bot.run

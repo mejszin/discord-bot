@@ -25,17 +25,29 @@ class Project
         return user == nil ? @owner : user.name
     end
 
-    def member_names(server)
+    # :green_circle: :white_circle: 
+
+    STATUS_ICONS = {
+        :offline => "○",
+        :idle => "○",
+        :online => "●"
+    }
+
+    def member_names(server, show_status = true)
         return @members.map do |member|
             user = server.member(member)
-            user == nil ? member : user.name
+            unless user == nil
+                icon = STATUS_ICONS[user.on(server).status]
+                show_status ? "#{icon} #{user.name}" : user.name
+            else
+                member
+            end
         end
     end
 
     def add_member(user_id)
         return false if member?(user_id)
         @members << user_id
-        write_to_file
         return true
     end
 
@@ -43,7 +55,6 @@ class Project
         return false if owner?(user_id)
         return false unless member?(user_id)
         @members -= [user_id]
-        write_to_file
         return true
     end
 
@@ -61,7 +72,6 @@ class Project
 
     def set_status(status)
         @status = status
-        write_to_file
         return true
     end
 

@@ -35,13 +35,17 @@ class ProjectController
     def add_project_member(user_id, title)
         project = find_project(title)
         return false if project == nil
-        return project.add_member(user_id)
+        result = project.add_member(user_id)
+        write_to_file if result == true
+        return result
     end
 
     def remove_project_member(user_id, title)
         project = find_project(title)
         return false if project == nil
-        return project.remove_member(user_id)
+        result = project.remove_member(user_id)
+        write_to_file if result == true
+        return result
     end
 
     def set_project_status(user_id, title, status)
