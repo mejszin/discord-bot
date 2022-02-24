@@ -29,6 +29,7 @@ class TaskController
     end
 
     def percent_complete(category = nil)
+        # Calculate overall percentage complete if no category given
         unless category == nil
             count = @tasks[category].count { |task| task.complete }
             total = @tasks[category].length
