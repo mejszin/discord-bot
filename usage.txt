@@ -1,0 +1,23 @@
+✧･ﾟ* Projects (in-development) ✧･ﾟ*
+
+~projects                         :: List active community projects
+~project-add <url> <title> <desc> :: Add a new project
+                                  :: (title cannot contain spaces)
+~project-disable <title>          :: Disable your project
+~project-enable <title>           :: Enable your project
+~project-join <title>             :: Join a project
+~project-leave <title>            :: Leave a project
+
+✧･ﾟ* Spotify Commands ✧･ﾟ*
+
+~spotify <query|url>      :: Formatted track message
+~spotify-info <query|url> :: Formatted track message with extra info
+~spotify-genres           :: List of available genres for suggestions
+~spotify-suggest <genres> :: Search for 3 random suggestions by genres
+~spotify-gamut            :: Print the energy emojis
+
+✧･ﾟ* Miscellaneous ✧･ﾟ*
+
+~quote  :: Random quote
+~sadcat :: Random sad cat picture
+~lofi   :: Random lo-fi aesthetic picture
