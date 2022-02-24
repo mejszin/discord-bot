@@ -32,6 +32,44 @@ class Project
         end
     end
 
+    def add_member(user_id)
+        return false if member?(user_id)
+        @members << user_id
+        write_to_file
+        return true
+    end
+
+    def remove_member(user_id)
+        return false if owner?(user_id)
+        return false unless member?(user_id)
+        @members -= [user_id]
+        write_to_file
+        return true
+    end
+
+    def member?(user_id)
+        return @members.include?(user_id)
+    end
+
+    def owner?(user_id)
+        return @owner == user_id
+    end
+
+    def title?(str)
+        return @title == str
+    end
+
+    def set_status(status)
+        @status = status
+        write_to_file
+        return true
+    end
+
+    def add_task_category(category)
+        return false if @task_controller.category?(category)
+        return @task_controller.add_category(category)
+    end
+
     def to_json
         return {
             "owner" => @owner,
@@ -40,7 +78,7 @@ class Project
             "url" => @url,
             "status" => @status,
             "members" => @members,
-            "tasks" => @tasks
+            "tasks" => @task_controller.to_json
         }
     end
 end

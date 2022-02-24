@@ -29,35 +29,29 @@ class ProjectController
 
     def add_project_member(user_id, title)
         for project in @projects do
-            if (title == project.title)
-                return false if project.members.include?(user_id)
-                project.members << user_id
-                write_to_file
-                return true
-            end
+            return project.add_member(user_id) if project.title?(title)
         end
         return false
     end
 
     def remove_project_member(user_id, title)
         for project in @projects do
-            if (title == project.title)
-                return false if user_id == project.owner
-                return false unless project.members.include?(user_id)
-                project.members -= [user_id]
-                write_to_file
-                return true
-            end
+            return project.remove_member(user_id) if project.title?(title)
         end
         return false
     end
 
     def set_project_status(user_id, title, status)
         for project in @projects do
-            if (user_id == project.owner) && (title == project.title)
-                project.status = status
-                write_to_file
-                return true
+            return project.set_status(status) if project.owner?(user_id) && project.title?(title)
+        end
+        return false
+    end
+
+    def add_task_category(user_id, title, category)
+        for project in @projects do
+            if (project.member?(user_id)) && (title == project.title)
+                return project.add_task_category(category)
             end
         end
         return false

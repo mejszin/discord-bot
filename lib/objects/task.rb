@@ -5,4 +5,11 @@ class Task
         @index = index
         @desc, @complete = data["desc"], data["complete"]
     end
+
+    def to_json
+        return {
+            "desc" => @desc,
+            "complete" => @complete
+        }
+    end
 end

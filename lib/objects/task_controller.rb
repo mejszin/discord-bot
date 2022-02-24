@@ -10,6 +10,14 @@ class TaskController
         end
     end
 
+    def category?(category)
+        return @tasks.key?(category)
+    end
+
+    def add_category(category)
+        @tasks[category] = []
+    end
+
     def percent_complete(category)
         count = @tasks[category].count { |task| task.complete }
         total = @tasks[category].length
@@ -20,5 +28,16 @@ class TaskController
         percent, fidelity = percent_complete(category), 20
         segments = (percent * (fidelity.to_f / 100)).floor
         return "[" + ("#" * segments) + (" " * (fidelity - segments)) + "]"
+    end
+
+    def to_json
+        hash = {}
+        for category, tasks in @tasks do
+            hash[category] = []
+            for task in tasks do
+                hash[category] << task.to_json
+            end
+        end
+        return hash
     end
 end
