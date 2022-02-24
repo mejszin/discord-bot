@@ -1,4 +1,4 @@
-class Projects
+class ProjectController
     attr_reader :projects
 
     def initialize(path = './data/projects.json')

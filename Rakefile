@@ -27,3 +27,23 @@ task :spotify_test do
 
     puts build_spotify_track_message("slenderbodies anemone")
 end
+
+task :project_test do
+    require 'bundler'
+    Bundler.setup(:default, :ci)
+
+    require './lib/objects/task_controller.rb'
+    require './lib/objects/project.rb'
+    require './lib/objects/project_controller.rb'
+
+    projects = ProjectController.new.projects
+    
+    for project in projects do
+        puts project.title if project.has_tasks?
+        for category, tasks in project.task_controller.tasks do
+            for task in tasks do
+                puts "#{task.complete ? "[X]" : "[ ]"} #{category} - #{task.desc}"
+            end
+        end
+    end
+end
