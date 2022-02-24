@@ -1,3 +1,9 @@
+# CHECKED_BOX = ":negative_squared_cross_mark:"
+# UNCHECKED_BOX = ":green_square:"
+
+CHECKED_BOX = "<:checked:946388166313652264>"
+UNCHECKED_BOX = "<:unchecked:946388178309373952>"
+
 class Task
     attr_accessor :index, :desc, :complete
     
@@ -11,7 +17,7 @@ class Task
     end
 
     def checkbox
-        return @complete ? "[X]" : "[ ]"
+        return @complete ? CHECKED_BOX : UNCHECKED_BOX
     end
 
     def to_json

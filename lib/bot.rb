@@ -29,8 +29,7 @@ require './lib/events/spotify.rb'
 require './lib/events/miscellaneous.rb'
 
 $bot.message(start_with: '~test') do |event|
-    user_id = event.message.user.id
-    event.respond event.server.member(user_id).name
+    event.respond event.message.content.chars.inspect
 end
 
 $bot.run

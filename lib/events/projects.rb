@@ -21,22 +21,22 @@ $bot.message(start_with: '~project-tasks') do |event|
             message = []
             # Progress bars
             progress_bar = project.task_controller.progress_bar
-            percent = project.task_controller.percent_complete
-            message << "all".ljust(16, " ") + "#{progress_bar} #{percent} %"
+            percent = project.task_controller.percent_complete.to_s.rjust(2, " ") + " %"
+            message << "all".ljust(16, " ") + progress_bar + " " + percent
             for category, tasks in project.task_controller.tasks do
                 progress_bar = project.task_controller.progress_bar(category)
-                percent = project.task_controller.percent_complete(category)
-                message << category.ljust(16, " ") + "#{progress_bar} #{percent} %"
-            end
-            message << ""
-            # Task list
-            for category, tasks in project.task_controller.tasks do
-                message << "#{category} tasks:"
-                for task in tasks do
-                    message << "#{task.checkbox} #{task.index} : #{task.desc}"
-                end
+                percent = project.task_controller.percent_complete(category).to_s.rjust(2, " ") + " %"
+                message << category.ljust(16, " ") + progress_bar + " " + percent
             end
             event.respond ["```", message, "```"].flatten.join("\n")
+            # Task list
+            for category, tasks in project.task_controller.tasks do
+                message = ["#{category} tasks:"]
+                for task in tasks do
+                    message << "#{task.checkbox} ``#{task.index}`` #{task.desc}"
+                end
+                event.respond message.flatten.join("\n")
+            end
         else
             event.respond "Could not find project!"
         end
