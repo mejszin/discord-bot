@@ -52,4 +52,8 @@
 > Show a random sad cat picture
 ~sadcat
 > Show a random lo-fi aesthetic picture
-~lofi  
+~lofi
+> Show a random prompt from our prompt list
+~prompt
+> Add a prompt suggestion to the prompt list
+~prompt-add <description>
