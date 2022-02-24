@@ -19,6 +19,6 @@ class TaskController
     def progress_bar(category)
         percent, fidelity = percent_complete(category), 20
         segments = (percent * (fidelity.to_f / 100)).floor
-        puts "[" + ("#" * segments) + (" " * (fidelity - segments)) + "]"
+        return "[" + ("#" * segments) + (" " * (fidelity - segments)) + "]"
     end
 end

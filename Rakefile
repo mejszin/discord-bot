@@ -40,12 +40,16 @@ task :project_test do
     projects = ProjectController.new.projects
     
     for project in projects do
-        puts project.title if project.has_tasks?
-        for category, tasks in project.task_controller.tasks do
-            puts project.task_controller.percent_complete(category).to_s + "%"
-            puts project.task_controller.progress_bar(category)
-            for task in tasks do
-                puts "#{task.complete ? "[X]" : "[ ]"} #{category} - #{task.desc}"
+        if project.has_tasks?
+            puts "Project #{project.title}:\n\n"
+            for category, tasks in project.task_controller.tasks do
+                percent = project.task_controller.percent_complete(category)
+                progress_bar = project.task_controller.progress_bar(category)
+                puts "  #{category} tasks:\n\n  #{progress_bar} (#{percent}%)\n\n"
+                for task in tasks do
+                    puts "  #{task.complete ? "[X]" : "[ ]"} (#{task.index}) #{category} - #{task.desc}"
+                end
+                puts "\n"
             end
         end
     end
