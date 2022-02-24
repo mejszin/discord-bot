@@ -4,6 +4,7 @@
 
 - Ruby
 - Rake
+- Bundler
 
 ### Dependencies
 
