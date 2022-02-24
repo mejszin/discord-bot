@@ -71,6 +71,15 @@ class ProjectController
         return result
     end
 
+    def remove_task(user_id, title, category, index)
+        project = find_project(title)
+        return false if project == nil
+        return false unless project.member?(user_id)
+        result = project.remove_task(category, index)
+        write_to_file if result == true
+        return result
+    end
+
     def complete_task(user_id, title, category, index)
         project = find_project(title)
         return false if project == nil

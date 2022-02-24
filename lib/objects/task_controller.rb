@@ -34,6 +34,13 @@ class TaskController
         return true
     end
 
+    def remove_task(category, index)
+        task = find_task(category, index)
+        return false if task == nil
+        @tasks[category] -= [task]
+        return true
+    end
+
     def complete_task(category, index)
         task = find_task(category, index)
         return false if task == nil
