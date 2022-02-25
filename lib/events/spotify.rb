@@ -1,43 +1,45 @@
 $bot.message(start_with: '~spotify') do |event|
-    words = event.content.split(" ")
-    if words.first == "~spotify"
-        if words.length > 1
-            event.respond build_spotify_track_message(words[1..-1].join(" "))
-            event.message.delete
-        else
-            event.respond "Command usage: ``~spotify <query|url>``"
+    args = event.content.split(" ")
+    return unless args.shift == "~spotify"
+    # Assign values from args and event
+    command = ["track", "info", "suggest", "genres", "gamut"].include?(args.first) ? args.shift : nil
+    # Case command
+    begin
+        event.respond case command
+            when "track"; spotify_track(args.join(" "))
+            when "info"; spotify_track_info(args.join(" "))
+            when "suggest"; spotify_suggest(args)
+            when "genres"; spotify_genres()
+            when "gamut"; spotify_gamut()
+            else; spotify_track(args.join(" "))
         end
-    end
-end
-
-$bot.message(start_with: '~spotify-info') do |event|
-    words = event.content.split(" ")
-    if words.length > 1
-        event.respond build_spotify_info_message(words[1..-1].join(" "))
         event.message.delete
-    else
-        event.respond "Command usage: ``~spotify-info ~spotify <query|url>``"
+    rescue => e
+        puts e.message
+        puts e.backtrace
+        event.respond format_error("Invalid command!")
     end
 end
 
-$bot.message(start_with: '~spotify-genres') do |event|
-    words = event.content.split(" ")
-    if words.length == 1
-        event.respond build_spotify_genres()
-    else
-        event.respond "Command usage: ``~spotify-genres``"
-    end
+def spotify_track(query = '')
+    return format_usage("~spotify track <query>") if query == ''
+    return build_spotify_track_message(query)
 end
 
-$bot.message(start_with: '~spotify-suggest') do |event|
-    words = event.content.split(" ")
-    if words.length > 1
-        event.respond build_spotify_suggestions(words[1..-1])
-    else
-        event.respond "Command usage: ``~spotify-suggest <genres>``"
-    end
+def spotify_track_info(query = '')
+    return format_usage("~spotify info <query>") if query == ''
+    return build_spotify_info_message(query)
 end
 
-$bot.message(start_with: '~spotify-gamut') do |event|
-    event.respond EMOTION_GAMUT.join(" ")
+def spotify_suggest(genres = [])
+    return format_usage("~spotify suggest <genres>") if genres == []
+    return build_spotify_suggestions(genres)
+end
+
+def spotify_genres()
+    return build_spotify_genres()
+end
+
+def spotify_gamut()
+    return EMOTION_GAMUT.join(" ")
 end
