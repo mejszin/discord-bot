@@ -108,7 +108,7 @@ def tasks_overwrite(user_id, project_title, category = nil, index = nil, text = 
 end
 
 def tasks_complete(user_id, project_title, category = nil, index = nil)
-    return format_usage("~tasks <project> complete <category> <index>") if ((category == nil) or (index == nil))
+    return format_usage("~tasks <project> complete <category> <index>") if ((category == nil) || (index == nil))
     result = ProjectController.new.complete_task(user_id, project_title, category, index)
     return result ? format_success("Completed task!") : format_error("Could not complete task!")
 end
