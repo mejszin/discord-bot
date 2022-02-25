@@ -33,6 +33,7 @@ $bot = Discordrb::Bot.new(token: DISCORD_TOKEN, client_id: DISCORD_CLIENT_ID)
 
 require './lib/events/help.rb'
 require './lib/events/projects.rb'
+require './lib/events/tasks.rb'
 require './lib/events/spotify.rb'
 require './lib/events/miscellaneous.rb'
 
@@ -47,6 +48,9 @@ $bot.message(start_with: '~test') do |event|
     #event.respond member.status.inspect
     #event.respond event.message.user.status.inspect
     #event.respond event.server.online_members.inspect
+    event.respond "foo"
+    return
+    event.respond "bar"
 end
 
 $bot.run
