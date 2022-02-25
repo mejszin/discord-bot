@@ -15,6 +15,10 @@ task :run do
     puts system("ruby #{BOT_PATH}") if check_keys
 end
 
+task :bg do
+    system("ruby #{BOT_PATH} &") if check_keys
+end
+
 task :spotify_test do
     require 'bundler'
     Bundler.setup(:default, :ci)
