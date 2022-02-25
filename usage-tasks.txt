@@ -1,0 +1,17 @@
+# Project tasks (in-development)
+
+Usage:
+  ~tasks <project> <command>
+
+Commands:
+  list                                   List all current tasks for a project
+  progress                               Display progress bars for task categories
+  add-category <name>                    Add a new task category
+  remove-category <name>                 Remove an existing task category
+  clear-category <name>                  Remove all tasks from category
+  add <category> <text>                  Add a new task to a category
+  remove <category> <index>              Remove a task
+  overwrite <category> <index> <text>    Overwrite a task
+  complete <category> <index>            Complete a task
+
+> Note: <category> cannot contain spaces

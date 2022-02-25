@@ -1,0 +1,14 @@
+# Projects (in-development)
+
+Usage:
+  ~projects <command>
+
+Commands:
+  list                                 List active community projects
+  add <project> <url> <description>    Add a new project
+  disable <project>                    Disable your project
+  enable <project>                     Enable your project
+  join <project>                       Join a project         
+  leave <project>                      Leave a project
+
+> Note: <project> cannot contain spaces

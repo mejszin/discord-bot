@@ -28,6 +28,7 @@ def format_standard(str); return "```\n#{str}\n```"; end
 def format_success(str); return "```diff\n+ #{str}\n```"; end
 def format_error(str); return "```diff\n- #{str}\n```"; end
 def format_usage(str); return "Command usage: ``#{str}``"; end
+def format_help(str); return "```markdown\n#{str}\n```"; end
 
 $bot = Discordrb::Bot.new(token: DISCORD_TOKEN, client_id: DISCORD_CLIENT_ID)
 
@@ -35,7 +36,7 @@ require './lib/events/help.rb'
 require './lib/events/projects.rb'
 require './lib/events/tasks.rb'
 require './lib/events/spotify.rb'
-require './lib/events/miscellaneous.rb'
+require './lib/events/misc.rb'
 
 $bot.message(start_with: '~init') do |event|
     $bot.profile.username = BOT_NAME
