@@ -1,2 +1,43 @@
-Test prompt
-Another prompt
+Tinder, Uber, Airbnb for X
+Sentiment analysis of either image or text
+Facial recognition
+Speech to Text or Text to Speech
+Language Translation
+Get ingredients or nutritional value of food from a photo
+Get a list of recipes from a photo of food in a fridge
+Shopping list
+Where to eat based on defined preferences
+Find a study group/tutor near you
+Summarize class notes/textbook
+Resume builder/grader
+Job listing or connecting employers to job candidates
+Interview bot to help you practice for interviews and uses "computer vision" and "natural language processing" to give you personalized feedback
+Sort out recyclables from trash
+Smart mirror
+Smart camera + facial recognition for security or any kind of basic alert system
+Smart pill dispenser that dispenses pills in correct doses at the right time
+Get diagnosis from a list of symptoms
+Sign language translator
+"Real-time" translation in the form of captions
+"Eyes" for the visually impaired: tells you what's in front of you using CV or if you're bumping into anything using a depth sensor
+Detecting/blocking harmful content online
+Message people around you
+Find people using facial recognition
+Tag things on a map for people to find
+Connecting people through music
+Connect people at hackathons to build projects together
+Music generation using deep learning
+New song recommendations from you friends or your preferences/interests
+Shared music playlists for a party
+Play random music from library based on mood
+Mining cryptocurrency through your browser
+Buy, sell, or auction site using cryptocurrency
+Block sites that allows you to procrastinate
+Browse the internet through SMS
+Hackathon idea generator
+Location based reminders app
+Basic stock market analysis
+Bill splitting
+Personalized ads billboard
+Detecting fake news
+Providing the "other side" to an article
