@@ -9,8 +9,8 @@ $bot.message(start_with: '~sadcat') do |event|
     event.respond File.readlines('./data/sadcats.txt').sample
 end
 
-$bot.message(start_with: '~lofi') do |event|
-    event.respond File.readlines('./data/lofi.txt').sample
+$bot.message(start_with: '~aesthetic') do |event|
+    event.respond File.readlines('./data/aesthetic.txt').sample
 end
 
 $bot.message(start_with: '~prompt') do |event|

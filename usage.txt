@@ -53,8 +53,8 @@
 ~quote
 > Show a random sad cat picture
 ~sadcat
-> Show a random lo-fi aesthetic picture
-~lofi
+> Show a random aesthetic picture
+~aesthetic
 > Show a random prompt from our prompt list
 ~prompt
 > Add a prompt suggestion to the prompt list
