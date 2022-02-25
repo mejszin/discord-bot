@@ -29,6 +29,8 @@
 ~project-task-add <title> <category> <description>
 > Remove a task
 ~project-task-remove <title> <category> <index>
+> Overwrite a task
+~project-task-overwrite <title> <category> <index> <description>
 > Complete a task
 ~project-task-complete <title> <category> <index>
 
