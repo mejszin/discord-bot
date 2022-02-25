@@ -67,7 +67,7 @@ class Project
     end
 
     def title?(str)
-        return @title == str
+        return @title.upcase == str.upcase
     end
 
     def set_status(status)

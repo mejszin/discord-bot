@@ -36,7 +36,6 @@ def tasks_list(project_title)
     if (project != nil) && project.active?
         if project.has_tasks?
             # Task list
-            puts project.task_controller.tasks
             message = []
             for category, tasks in project.task_controller.tasks do
                 message << "**#{category}:**"
