@@ -1,6 +1,6 @@
-$bot.message(start_with: '~spotify') do |event|
+$bot.message(start_with: PREFIX + 'spotify') do |event|
     args = event.content.split(" ")
-    return unless args.shift == "~spotify"
+    return unless args.shift == PREFIX + "spotify"
     # Assign values from args and event
     command = ["track", "info", "suggest", "genres", "gamut"].include?(args.first) ? args.shift : nil
     # Case command
@@ -22,17 +22,17 @@ $bot.message(start_with: '~spotify') do |event|
 end
 
 def spotify_track(query = '')
-    return format_usage("~spotify track <query>") if query == ''
+    return format_usage("spotify track <query>") if query == ''
     return build_spotify_track_message(query)
 end
 
 def spotify_track_info(query = '')
-    return format_usage("~spotify info <query>") if query == ''
+    return format_usage("spotify info <query>") if query == ''
     return build_spotify_info_message(query)
 end
 
 def spotify_suggest(genres = [])
-    return format_usage("~spotify suggest <genres>") if genres == []
+    return format_usage("spotify suggest <genres>") if genres == []
     return build_spotify_suggestions(genres)
 end
 

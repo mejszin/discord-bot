@@ -1,9 +1,9 @@
-$bot.message(start_with: '~projects') do |event|
+$bot.message(start_with: PREFIX + 'projects') do |event|
     args = event.content.split(" ")
-    return unless args.shift == "~projects"
+    return unless args.shift == PREFIX + "projects"
     # Display usage if args < 1
     if args.length < 1
-        event.respond format_usage("~projects <command>")
+        event.respond format_usage("projects <command>")
         return
     end
     # Assign values from args and event
@@ -57,37 +57,37 @@ def projects_list(server, is_admin = false)
 end
 
 def projects_export(user_id, is_admin = false, project_title = nil)
-    return format_usage("~projects export <project>") if project_title == nil
+    return format_usage("projects export <project>") if project_title == nil
     json = ProjectController.new.export_project(user_id, project_title, is_admin)
     return json != nil ? format_standard(json) : format_error("Could not export project!")
 end
 
 def projects_add(user_id, project_title = nil, url = nil, description = '')
-    return format_usage("~projects new <project> <url> <description>") if (project_title == nil || url == nil || description == '')
+    return format_usage("projects new <project> <url> <description>") if (project_title == nil || url == nil || description == '')
     result = ProjectController.new.add_project(user_id, project_title, description, url)
     return result ? format_success("Created project!") : format_error("Could not create project!")
 end
 
 def projects_join(user_id, project_title = nil)
-    return format_usage("~projects join <project>") if project_title == nil
+    return format_usage("projects join <project>") if project_title == nil
     result = ProjectController.new.add_project_member(user_id, project_title)
     return result ? format_success("Joined project!") : format_error("Could not join project!")
 end
 
 def projects_leave(user_id, project_title = nil)
-    return format_usage("~projects leave <project>") if project_title == nil
+    return format_usage("projects leave <project>") if project_title == nil
     result = ProjectController.new.remove_project_member(user_id, project_title)
     return result ? format_success("Left project!") : format_error("Could not leave project!")
 end
 
 def projects_enable(user_id, project_title = nil)
-    return format_usage("~projects enable <project>") if project_title == nil
+    return format_usage("projects enable <project>") if project_title == nil
     result = ProjectController.new.set_project_status(user_id, project_title, true)
     return result ? format_success("Enabled project!") : format_error("Could not enable project!")
 end
 
 def projects_disable(user_id, project_title = nil)
-    return format_usage("~projects disable <project>") if project_title == nil
+    return format_usage("projects disable <project>") if project_title == nil
     result = ProjectController.new.set_project_status(user_id, project_title, false)
     return result ? format_success("Disabled project!") : format_error("Could not disable project!")
 end

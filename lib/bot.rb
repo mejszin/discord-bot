@@ -1,5 +1,6 @@
 BOT_NAME = 'La Soleil'
 BOT_AVATAR = './data/sunny.png'
+PREFIX = '.'
 
 require 'bundler'
 Bundler.setup(:default, :ci)
@@ -27,7 +28,7 @@ puts "SPOTIFY_CLIENT_SECRET=#{SPOTIFY_CLIENT_SECRET}"
 def format_standard(str); return "```\n#{str}\n```"; end
 def format_success(str); return "```diff\n+ #{str}\n```"; end
 def format_error(str); return "```diff\n- #{str}\n```"; end
-def format_usage(str); return "Command usage: ``#{str}``"; end
+def format_usage(str); return "Command usage: ``#{PREFIX}#{str}``"; end
 def format_help(str); return "```markdown\n#{str}\n```"; end
 
 $bot = Discordrb::Bot.new(token: DISCORD_TOKEN, client_id: DISCORD_CLIENT_ID)
@@ -38,13 +39,13 @@ require './lib/events/tasks.rb'
 require './lib/events/spotify.rb'
 require './lib/events/misc.rb'
 
-$bot.message(start_with: '~init') do |event|
+$bot.message(start_with: PREFIX + 'init') do |event|
     $bot.profile.username = BOT_NAME
     $bot.profile.avatar = File.open(BOT_AVATAR)
     event.respond format_success('Initialized bot!')
 end
 
-$bot.message(start_with: '~test') do |event|
+$bot.message(start_with: PREFIX + 'test') do |event|
     #member = event.message.user.on(event.server)
     #event.respond member.status.inspect
     #event.respond event.message.user.status.inspect
