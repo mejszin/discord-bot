@@ -130,7 +130,7 @@ $bot.message(start_with: '~project-task-overwrite') do |event|
         result = ProjectController.new.overwrite_task(user_id, title, category, index, desc)
         event.respond result ? format_success("Overwritten task!") : format_error("Could not overwrite task!")
     else
-        event.respond format_usage("~project-task-remove <title> <category> <index> <description>")
+        event.respond format_usage("~project-task-overwrite <title> <category> <index> <description>")
     end
 end
 
