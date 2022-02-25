@@ -79,14 +79,3 @@ def projects_disable(user_id, project_title = nil)
     result = ProjectController.new.set_project_status(user_id, project_title, false)
     return result ? format_success("Disabled project!") : format_error("Could not disable project!")
 end
-
-$bot.message(start_with: '~project-add') do |event|
-    words = event.content.split(" ")
-    if words.length > 2
-        owner, url, title, desc = event.message.user.id.to_s, words[1], words[2], words[3..-1].join(" ")
-        result = ProjectController.new.add_project(owner, title, desc, url)
-        event.respond result ? format_success("Added project!") : format_error("Could not add project!")
-    else
-        event.respond format_usage("~project-add <url> <title (no spaces)> <description>")
-    end
-end
