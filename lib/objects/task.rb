@@ -25,6 +25,11 @@ class Task
         return true
     end
 
+    def set_desc(desc)
+        @desc = desc
+        return true
+    end
+
     def checkbox
         return @complete ? CHECKED_BOX : UNCHECKED_BOX
     end

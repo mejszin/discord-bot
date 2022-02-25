@@ -91,6 +91,10 @@ class Project
         return @task_controller.remove_task(category, index)
     end
 
+    def overwrite_task(category, index, desc)
+        return @task_controller.overwrite_task(category, index, desc)
+    end
+
     def complete_task(category, index)
         return @task_controller.complete_task(category, index)
     end

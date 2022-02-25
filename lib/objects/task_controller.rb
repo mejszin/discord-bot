@@ -51,6 +51,12 @@ class TaskController
         return true
     end
 
+    def overwrite_task(category, index, desc)
+        task = find_task(category, index)
+        return false if task == nil
+        return task.set_desc(desc)
+    end
+
     def complete_task(category, index)
         task = find_task(category, index)
         return false if task == nil

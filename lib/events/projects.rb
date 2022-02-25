@@ -123,6 +123,17 @@ $bot.message(start_with: '~project-task-remove') do |event|
     end
 end
 
+$bot.message(start_with: '~project-task-overwrite') do |event|
+    words = event.content.split(" ")
+    if words.length > 4
+        user_id, title, category, index, desc = event.message.user.id.to_s, words[1], words[2], words[3], words[4..-1].join(" ")
+        result = ProjectController.new.overwrite_task(user_id, title, category, index, desc)
+        event.respond result ? format_success("Overwritten task!") : format_error("Could not overwrite task!")
+    else
+        event.respond format_usage("~project-task-remove <title> <category> <index> <description>")
+    end
+end
+
 $bot.message(start_with: '~project-task-complete') do |event|
     words = event.content.split(" ")
     if words.length == 4
