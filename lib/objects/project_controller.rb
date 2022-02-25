@@ -21,13 +21,21 @@ class ProjectController
         end
     end
 
+    def export_project(user_id, title, is_admin = false)
+        require 'json'
+        project = find_project(title)
+        return nil if project == nil
+        return nil unless (project.owner?(user_id) || is_admin)
+        return JSON.pretty_generate(project.to_json)
+    end
+
     def find_project(title)
         @projects.each { |project| return project if project.title?(title) }
         return nil
     end
 
-    def add_project(owner, title, desc, url)
-        data = { "owner" => owner, "title" => title, "desc" => desc, "url" => url }
+    def add_project(owner, title, description, url)
+        data = { "owner" => owner, "title" => title, "description" => description, "url" => url }
         @projects << Project.new(data)
         write_to_file
         return true
@@ -76,11 +84,11 @@ class ProjectController
         return result
     end
 
-    def add_task(user_id, title, category, desc)
+    def add_task(user_id, title, category, text)
         project = find_project(title)
         return false if project == nil
         return false unless project.member?(user_id)
-        result = project.add_task(category, desc)
+        result = project.add_task(category, text)
         write_to_file if result == true
         return result
     end
@@ -94,11 +102,11 @@ class ProjectController
         return result
     end
 
-    def overwrite_task(user_id, title, category, index, desc)
+    def overwrite_task(user_id, title, category, index, text)
         project = find_project(title)
         return false if project == nil
         return false unless project.member?(user_id)
-        result = project.overwrite_task(category, index, desc)
+        result = project.overwrite_task(category, index, text)
         write_to_file if result == true
         return result
     end

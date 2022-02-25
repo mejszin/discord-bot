@@ -40,7 +40,7 @@ def tasks_list(project_title)
             for category, tasks in project.task_controller.tasks do
                 message << "**#{category}:**"
                 for task in tasks do
-                    message << "#{task.checkbox} ``#{task.index}`` #{task.desc}"
+                    message << "#{task.checkbox} ``#{task.index}`` #{task.text}"
                 end
             end
             return message.flatten.join("\n")

@@ -8,7 +8,9 @@ Commands:
   add <project> <url> <description>    Add a new project
   disable <project>                    Disable your project
   enable <project>                     Enable your project
-  join <project>                       Join a project         
+  join <project>                       Join a project
   leave <project>                      Leave a project
+  export <project>                     Export project data as JSON
 
 > Note: <project> cannot contain spaces
+> Note: You must be the owner to enable, disable, or export your project

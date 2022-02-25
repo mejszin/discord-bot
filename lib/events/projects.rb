@@ -20,6 +20,7 @@ $bot.message(start_with: '~projects') do |event|
             when "leave"     ; projects_leave(user_id, *args)
             when "enable"    ; projects_enable(user_id, *args)
             when "disable"   ; projects_disable(user_id, *args)
+            when "export"    ; projects_export(user_id, is_admin, *args)
             else; format_error("Unknown projects command \"#{command}\"")
         end
         if responses.is_a?(Array)
@@ -44,7 +45,7 @@ def projects_list(server, is_admin = false)
             # Build message
             message = ["= #{project.title} ="]
             message << "Members     :: #{project.member_names(server).join(", ")}"
-            message << "Description :: #{project.desc}"
+            message << "Description :: #{project.description}"
            #message << "Owner   :: #{project.owner_name(server)}"
             message << "Website     :: #{project.url}"
             message << "Progress    :: #{progress_bar}"
@@ -53,6 +54,12 @@ def projects_list(server, is_admin = false)
         end
     end
     return responses
+end
+
+def projects_export(user_id, is_admin = false, project_title = nil)
+    return format_usage("~projects export <project>") if project_title == nil
+    json = ProjectController.new.export_project(user_id, project_title, is_admin)
+    return json != nil ? format_standard(json) : format_error("Could not export project!")
 end
 
 def projects_add(user_id, project_title = nil, url = nil, description = '')

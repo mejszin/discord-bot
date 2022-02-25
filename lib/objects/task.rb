@@ -5,11 +5,11 @@ CHECKED_BOX = "<:checked:946388166313652264>"
 UNCHECKED_BOX = "<:unchecked:946388178309373952>"
 
 class Task
-    attr_accessor :index, :desc
+    attr_accessor :index, :text
     
     def initialize(index, data)
         @index = index
-        @desc, @complete = data["desc"], data["complete"]
+        @text, @complete = data["text"], data["complete"]
     end
 
     def index?(index)
@@ -25,8 +25,8 @@ class Task
         return true
     end
 
-    def set_desc(desc)
-        @desc = desc
+    def set_text(text)
+        @text = text
         return true
     end
 
@@ -36,7 +36,7 @@ class Task
 
     def to_json
         return {
-            "desc" => @desc,
+            "text" => @text,
             "complete" => @complete
         }
     end

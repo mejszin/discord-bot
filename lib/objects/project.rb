@@ -1,9 +1,9 @@
 class Project
-    attr_accessor :owner, :title, :url, :desc, :status, :members, :task_controller
+    attr_accessor :owner, :title, :url, :description, :status, :members, :task_controller
 
     def initialize(data)
         # Ingest values from data
-        @owner, @title, @desc, @url = data["owner"], data["title"], data["desc"], data["url"]
+        @owner, @title, @description, @url = data["owner"], data["title"], data["description"], data["url"]
         # Default status to true if not given
         @status = data.key?("status") ? data["status"] : true
         # Default members to just owner if not given
@@ -83,16 +83,16 @@ class Project
         return @task_controller.remove_category(category)
     end
 
-    def add_task(category, desc)
-        return @task_controller.add_task(category, desc)
+    def add_task(category, text)
+        return @task_controller.add_task(category, text)
     end
 
     def remove_task(category, index = nil)
         return @task_controller.remove_task(category, index)
     end
 
-    def overwrite_task(category, index, desc)
-        return @task_controller.overwrite_task(category, index, desc)
+    def overwrite_task(category, index, text)
+        return @task_controller.overwrite_task(category, index, text)
     end
 
     def complete_task(category, index)
@@ -103,7 +103,7 @@ class Project
         return {
             "owner" => @owner,
             "title" => @title,
-            "desc" => @desc,
+            "description" => @description,
             "url" => @url,
             "status" => @status,
             "members" => @members,

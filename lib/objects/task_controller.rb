@@ -32,10 +32,10 @@ class TaskController
         return true
     end
 
-    def add_task(category, desc)
+    def add_task(category, text)
         return false unless category?(category)
         index = @tasks[category].length
-        data = { "desc" => desc, "complete" => false }
+        data = { "text" => text, "complete" => false }
         @tasks[category] << Task.new(index, data)
         return true
     end
@@ -51,10 +51,10 @@ class TaskController
         return true
     end
 
-    def overwrite_task(category, index, desc)
+    def overwrite_task(category, index, text)
         task = find_task(category, index)
         return false if task == nil
-        return task.set_desc(desc)
+        return task.set_text(text)
     end
 
     def complete_task(category, index)
