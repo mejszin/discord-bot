@@ -38,12 +38,17 @@ def projects_list(server, is_admin = false)
     responses = []
     for project in ProjectController.new.projects do
         if project.active? || is_admin
+            # Get progress bar with percentage
+            percent = project.task_controller.percent_complete.to_s + " %"
+            progress_bar = project.task_controller.progress_bar + " " + percent
+            # Build message
             message = ["= #{project.title} ="]
-            message << "Owner   :: #{project.owner_name(server)}"
-            message << "URL     :: #{project.url}"
-            message << "Desc    :: #{project.desc}"
-            message << "Members :: #{project.member_names(server).join(", ")}"
-            message << "Status  :: #{project.status ? "Enabled" : "Disabled"}" if is_admin
+            message << "Members     :: #{project.member_names(server).join(", ")}"
+            message << "Description :: #{project.desc}"
+           #message << "Owner   :: #{project.owner_name(server)}"
+            message << "Website     :: #{project.url}"
+            message << "Progress    :: #{progress_bar}"
+           #message << "Status      :: #{project.status ? "Enabled" : "Disabled"}" if is_admin
             responses << ["```asciidoc", message, "```"].flatten.join("\n")
         end
     end

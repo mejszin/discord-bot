@@ -68,9 +68,11 @@ class TaskController
         unless category == nil
             count = @tasks[category].count { |task| task.complete? }
             total = @tasks[category].length
+            return 0 if total == 0
         else
             count = @tasks.map { |cat, tasks| tasks.count { |task| task.complete? } }.sum
             total = @tasks.map { |cat, tasks| tasks.length }.sum
+            return 0 if total == 0
         end
         return ((count.to_f / total.to_f) * 100).round
     end
