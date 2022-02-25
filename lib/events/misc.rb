@@ -14,16 +14,18 @@ $bot.message(start_with: '~aesthetic') do |event|
 end
 
 $bot.message(start_with: '~prompt') do |event|
-    event.respond format_standard(File.readlines('./data/prompts.txt').sample) if event.content == "~prompt"
-end
-
-$bot.message(start_with: '~prompt-add') do |event|
-    words = event.content.split(" ")
-    if words.length > 1
-        desc = words[1..-1].join(" ")
-        File.open('./data/prompts.txt', 'a') { |f| f.write(desc) }
-        event.respond format_success("Added prompt!")
+    args = event.content.split(" ")
+    return unless args.shift == '~prompt'
+    if args.empty?
+        event.respond format_standard(File.readlines('./data/prompts.txt').sample) 
     else
-        event.respond format_usage("~prompt-add <description>")
+        command = args.shift
+        text = args.join(' ')
+        if (command == "add") && (text != '')
+            File.open('./data/prompts.txt', 'a') { |f| f.write(text) }
+            event.respond format_success("Added prompt!")
+        else
+            event.respond format_usage("~prompt add <text>")
+        end
     end
 end

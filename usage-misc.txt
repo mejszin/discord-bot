@@ -1,12 +1,8 @@
-# Miscellaneous
+# Misc
 
-> Show a random quote
-~quote
-> Show a random sad cat picture
-~sadcat
-> Show a random aesthetic picture
-~aesthetic
-> Show a random prompt from our prompt list
-~prompt
-> Add a prompt suggestion to the prompt list
-~prompt-add <description>
+Usage:
+  ~quote                Show a random quote
+  ~sadcat               Show a random sad cat picture
+  ~aesthetic            Show a random aesthetic picture
+  ~prompt               Show a random prompt from our prompt list
+  ~prompt add <text>    Add a prompt suggestion to the prompt list
