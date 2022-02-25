@@ -22,7 +22,7 @@ $bot.message(start_with: '~projects') do |event|
             when "disable"   ; projects_disable(user_id, *args)
             else; format_error("Unknown projects command \"#{command}\"")
         end
-         if responses.is_a?(Array)
+        if responses.is_a?(Array)
             responses.each { |response| event.respond response }
         else
             event.respond responses
