@@ -1,3 +1,6 @@
+BOT_NAME = 'La Soleil'
+BOT_AVATAR = './data/sunny.png'
+
 require 'bundler'
 Bundler.setup(:default, :ci)
 
@@ -32,6 +35,12 @@ require './lib/events/help.rb'
 require './lib/events/projects.rb'
 require './lib/events/spotify.rb'
 require './lib/events/miscellaneous.rb'
+
+$bot.message(start_with: '~init') do |event|
+    $bot.profile.username = BOT_NAME
+    $bot.profile.avatar = File.open(BOT_AVATAR)
+    event.respond format_success('Initialized bot!')
+end
 
 $bot.message(start_with: '~test') do |event|
     #member = event.message.user.on(event.server)
