@@ -13,7 +13,7 @@ $bot.message(start_with: PREFIX + 'tasks') do |event|
     # Case command
     begin
         event.respond case command
-            when "list"           ; tasks_list(project)
+            when "list"           ; tasks_list(project, args)
             when "progress"       ; tasks_progress(project)
             when "add-category"   ; tasks_category_add(user_id, project, *args)
             when "remove-category"; tasks_category_remove(user_id, project, *args)
@@ -31,16 +31,18 @@ $bot.message(start_with: PREFIX + 'tasks') do |event|
     end
 end
 
-def tasks_list(project_title)
+def tasks_list(project_title, categories = [])
     project = ProjectController.new.find_project(project_title)
     if (project != nil) && project.active?
         if project.has_tasks?
             # Task list
             message = []
             for category, tasks in project.task_controller.tasks do
-                message << "**#{category}:**"
-                for task in tasks do
-                    message << "#{task.checkbox} ``#{task.index}`` #{task.text}"
+                if (categories == []) or (categories.include?(category))
+                    message << "**#{category}:**"
+                    for task in tasks do
+                        message << "#{task.checkbox} ``#{task.index}`` #{task.text}"
+                    end
                 end
             end
             return message.flatten.join("\n")

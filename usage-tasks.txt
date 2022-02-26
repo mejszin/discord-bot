@@ -4,7 +4,7 @@ Usage:
   ~tasks <project> <command>
 
 Commands:
-  list                                   List all current tasks for a project
+  list <optional: categories>            List all current tasks for a project
   progress                               Display progress bars for task categories
   add-category <name>                    Add a new task category
   remove-category <name>                 Remove an existing task category
