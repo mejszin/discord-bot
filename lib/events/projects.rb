@@ -14,13 +14,14 @@ $bot.message(start_with: PREFIX + 'projects') do |event|
     # Case command
     begin
         responses = case command
-            when "list"      ; projects_list(server, is_admin)
-            when "add", "new"; projects_add(user_id, args.shift, args.shift, args.join(" "))
-            when "join"      ; projects_join(user_id, *args)
-            when "leave"     ; projects_leave(user_id, *args)
-            when "enable"    ; projects_enable(user_id, *args)
-            when "disable"   ; projects_disable(user_id, *args)
-            when "export"    ; projects_export(user_id, is_admin, *args)
+            when "list"                ; projects_list(server, is_admin)
+            when "add", "new", "create"; projects_add(user_id, args.shift, args.shift, args.join(" "))
+            when "description"         ; projects_description(user_id, args.shift, args.join(" "))
+            when "join"                ; projects_join(user_id, *args)
+            when "leave"               ; projects_leave(user_id, *args)
+            when "enable"              ; projects_enable(user_id, *args)
+            when "disable"             ; projects_disable(user_id, *args)
+            when "export"              ; projects_export(user_id, is_admin, *args)
             else; format_error("Unknown projects command \"#{command}\"")
         end
         if responses.is_a?(Array)
@@ -63,9 +64,15 @@ def projects_export(user_id, is_admin = false, project_title = nil)
 end
 
 def projects_add(user_id, project_title = nil, url = nil, description = '')
-    return format_usage("projects new <project> <url> <description>") if (project_title == nil || url == nil || description == '')
+    return format_usage("projects create|new|add <project> <url> <description>") if (project_title == nil || url == nil || description == '')
     result = ProjectController.new.add_project(user_id, project_title, description, url)
     return result ? format_success("Created project!") : format_error("Could not create project!")
+end
+
+def projects_description(user_id, project_title = nil, description = '')
+    return format_usage("projects description <description> <text>") if (project_title == nil || description == '')
+    result = ProjectController.new.set_project_description(user_id, project_title, description)
+    return result ? format_success("Changed description!") : format_error("Could not change description!")
 end
 
 def projects_join(user_id, project_title = nil)

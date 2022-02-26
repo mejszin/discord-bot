@@ -75,6 +75,11 @@ class Project
         return true
     end
 
+    def set_description(description)
+        @description = description
+        return true
+    end
+
     def add_task_category(category)
         return @task_controller.add_category(category)
     end

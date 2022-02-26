@@ -41,6 +41,15 @@ class ProjectController
         return true
     end
 
+    def set_project_description(user_id, title, description)
+        project = find_project(title)
+        return false if project == nil
+        return false unless project.owner?(user_id)
+        result = project.set_description(description)
+        write_to_file if result == true
+        return result
+    end
+
     def add_project_member(user_id, title)
         project = find_project(title)
         return false if project == nil
