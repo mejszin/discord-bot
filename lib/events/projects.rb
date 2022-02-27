@@ -17,6 +17,7 @@ $bot.message(start_with: PREFIX + 'projects') do |event|
             when "list"                ; projects_list(server, is_admin)
             when "add", "new", "create"; projects_add(user_id, args.shift, args.shift, args.join(" "))
             when "description"         ; projects_description(user_id, args.shift, args.join(" "))
+            when "website"             ; projects_website(user_id, *args)
             when "join"                ; projects_join(user_id, *args)
             when "leave"               ; projects_leave(user_id, *args)
             when "enable"              ; projects_enable(user_id, *args)
@@ -73,6 +74,14 @@ def projects_description(user_id, project_title = nil, description = '')
     return format_usage("projects description <description> <text>") if (project_title == nil || description == '')
     result = ProjectController.new.set_project_description(user_id, project_title, description)
     return result ? format_success("Changed description!") : format_error("Could not change description!")
+end
+
+def projects_website(user_id, project_title = nil, url = nil)
+    return format_usage("TODO: #{PREFIX}projects website")
+    #return format_usage("projects website <url>") if project_title == nil
+    #return ProjectController.new.project_url(user_id, project_title, url) if url == nil
+    #result = ProjectController.new.set_project_url(user_id, project_title, url)
+    #return result ? format_success("Changed URL!") : format_error("Could not change URL!")
 end
 
 def projects_join(user_id, project_title = nil)
