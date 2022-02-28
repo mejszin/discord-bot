@@ -14,6 +14,7 @@ require './lib/objects/task.rb'
 require './lib/objects/task_controller.rb'
 require './lib/objects/project.rb'
 require './lib/objects/project_controller.rb'
+require './lib/objects/changelog_controller.rb'
 
 DISCORD_TOKEN = File.read('./discord_token').chomp
 DISCORD_CLIENT_ID = File.read('./discord_client_id').chomp
@@ -36,6 +37,7 @@ $bot = Discordrb::Bot.new(token: DISCORD_TOKEN, client_id: DISCORD_CLIENT_ID)
 require './lib/events/help.rb'
 require './lib/events/projects.rb'
 require './lib/events/tasks.rb'
+require './lib/events/changelog.rb'
 require './lib/events/spotify.rb'
 require './lib/events/misc.rb'
 

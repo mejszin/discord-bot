@@ -128,6 +128,43 @@ class ProjectController
         write_to_file if result == true
         return result
     end
+
+    def add_changelog(user_id, title, category, text)
+        project = find_project(title)
+        return false if project == nil
+        return false unless project.member?(user_id)
+        result = project.add_changelog(category, text)
+        write_to_file if result == true
+        return result
+    end
+
+    def remove_changelog(user_id, title, category, index = nil)
+        project = find_project(title)
+        return false if project == nil
+        return false unless project.member?(user_id)
+        result = project.remove_changelog(category, index)
+        write_to_file if result == true
+        return result
+    end
+
+    def add_changelog_category(user_id, title, category)
+        project = find_project(title)
+        return false if project == nil
+        return false unless project.member?(user_id)
+        result = project.add_changelog_category(category)
+        write_to_file if result == true
+        return result
+    end
+
+    def remove_changelog_category(user_id, title, category)
+        project = find_project(title)
+        return false if project == nil
+        return false unless project.member?(user_id)
+        result = project.remove_changelog_category(category)
+        write_to_file if result == true
+        return result
+    end
+
 end
 
 # projects = Projects.new

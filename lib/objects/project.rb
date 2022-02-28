@@ -1,5 +1,6 @@
 class Project
-    attr_accessor :owner, :title, :url, :description, :status, :members, :task_controller
+    attr_accessor :owner, :title, :url, :description, :status, :members
+    attr_accessor :task_controller, :changelog_controller
 
     def initialize(data)
         # Ingest values from data
@@ -10,6 +11,8 @@ class Project
         @members = data.key?("members") ? data["members"] : [@owner]
         # Default building task controller with an empty hash if not given
         @task_controller = TaskController.new(data.key?("tasks") ? data["tasks"] : {})
+        # Default building changelog controller with an empty hash if not given
+        @changelog_controller = ChangelogController.new(data.key?("changelogs") ? data["changelogs"] : {})
     end
 
     def active?
@@ -17,7 +20,17 @@ class Project
     end
 
     def has_tasks?
-        return @task_controller.tasks != {}
+        for category, tasks in @task_controller.tasks do
+            return true unless tasks == []
+        end
+        return false
+    end
+
+    def has_changelogs?
+        for category, changelogs in @changelog_controller.changelogs do
+            return true unless changelogs == []
+        end
+        return false
     end
 
     def owner_name(server)
@@ -104,6 +117,22 @@ class Project
         return @task_controller.complete_task(category, index)
     end
 
+    def add_changelog(category, text)
+        return @changelog_controller.add_changelog(category, text)
+    end
+
+    def remove_changelog(category, index = nil)
+        return @changelog_controller.remove_changelog(category, index)
+    end
+
+    def add_changelog_category(category)
+        return @changelog_controller.add_category(category)
+    end
+
+    def remove_changelog_category(category)
+        return @changelog_controller.remove_category(category)
+    end
+
     def to_json
         return {
             "owner" => @owner,
@@ -112,7 +141,8 @@ class Project
             "url" => @url,
             "status" => @status,
             "members" => @members,
-            "tasks" => @task_controller.to_json
+            "tasks" => @task_controller.to_json,
+            "changelogs" => @changelog_controller.to_json
         }
     end
 end

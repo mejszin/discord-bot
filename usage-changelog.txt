@@ -1,0 +1,13 @@
+# Project changelog (in-development)
+
+Usage:
+  ~changelog <project> <command>
+
+Commands:
+  list <optional: categories>    List all changelogs for a project
+  add <category> <text>          Add changelog to project
+  remove <category> <index>      Remove changelog from project
+  add-category <name>            Add a new changelog category
+  remove-category <name>         Remove an existing changelog category
+  
+> Note: <category> cannot contain spaces

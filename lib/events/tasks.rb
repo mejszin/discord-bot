@@ -39,7 +39,7 @@ def tasks_list(project_title, categories = [])
             message = []
             for category, tasks in project.task_controller.tasks do
                 if (categories == []) or (categories.include?(category))
-                    message << "**#{category}:**"
+                    message << "**``#{category}``**"
                     for task in tasks do
                         message << "#{task.checkbox} ``#{task.index}`` #{task.text}"
                     end
@@ -92,7 +92,7 @@ def tasks_category_clear(user_id, project_title, category = nil)
 end
 
 def tasks_add(user_id, project_title, category = nil, text = '')
-    return format_usage("~tasks <project> add <category> <text>") if ((category == nil) || (text == ''))
+    return format_usage("tasks <project> add <category> <text>") if ((category == nil) || (text == ''))
     result = ProjectController.new.add_task(user_id, project_title, category, text)
     return result ? format_success("Added task!") : format_error("Could not add task!")
 end
