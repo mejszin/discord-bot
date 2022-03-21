@@ -63,17 +63,20 @@ class TaskController
         return task.complete
     end
 
-    def percent_complete(category = nil)
-        # Calculate overall percentage complete if no category given
+    def complete_total(category = nil)
         unless category == nil
             count = @tasks[category].count { |task| task.complete? }
             total = @tasks[category].length
-            return 0 if total == 0
         else
             count = @tasks.map { |cat, tasks| tasks.count { |task| task.complete? } }.sum
             total = @tasks.map { |cat, tasks| tasks.length }.sum
-            return 0 if total == 0
         end
+        return [count, total]
+    end
+
+    def percent_complete(category = nil)
+        # Calculate overall percentage complete if no category given
+        count, total = complete_total(nil)
         return ((count.to_f / total.to_f) * 100).round
     end
 

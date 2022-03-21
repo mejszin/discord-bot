@@ -82,9 +82,9 @@ def tasks_progress_image(project_title)
         message = []
         # Progress bars
         percentages = []
-        percentages << ["ALL", project.task_controller.percent_complete.to_f / 100]
+        percentages << ["ALL", *project.task_controller.complete_total]
         for category, tasks in project.task_controller.tasks do
-            percentages << [category.upcase, project.task_controller.percent_complete(category).to_f / 100]
+            percentages << [category.upcase, *project.task_controller.complete_total(category)]
         end
         return bar_graph_png(percentages)
     else

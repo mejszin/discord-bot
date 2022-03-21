@@ -54,7 +54,7 @@ def bar_graph_png(percentages = [0.3, 0.5, 0.1, 0.7, 0.4])
     # File name
     filename = "./temp/#{(0...8).map { (65 + rand(26)).chr }.join}.png"
     # Base dimensions
-    margin, width = 4, 240
+    margin, width = 4, 320
     bar_height, bar_width = 12, width - 2 * margin
     height = margin * (1 + percentages.length) + percentages.length * bar_height
     # Create PNG with border
@@ -62,7 +62,8 @@ def bar_graph_png(percentages = [0.3, 0.5, 0.1, 0.7, 0.4])
     png.rect(0, 0, width, height, chunky_clr("#505673"))
     # Create bars
     percentages.each_with_index do |data, index|
-        caption, percentage = data
+        caption, complete, total = data
+        percentage = complete / total.to_f
         top = margin + (bar_height + margin) * index
         png.rect(margin, top, margin + bar_width * percentage, top + bar_height, chunky_clr, chunky_clr("#{DATA_CLRS[index]}AA"))
         png.rect(margin, top, margin + bar_width, top + bar_height, chunky_clr("#505673"))
@@ -70,6 +71,10 @@ def bar_graph_png(percentages = [0.3, 0.5, 0.1, 0.7, 0.4])
         # Percentage text
         caption = (percentage * 100).floor.to_s.rjust(3, " ") + "%"
         left = width - (1 + margin + chunky_text_width(caption))
+        png = chunky_print(png, left, top + 3, caption, chunky_clr("#FFFFFFDD"))
+        # Count text
+        caption = "[#{complete}/#{total}]"
+        left = width - (36 + chunky_text_width(caption))
         png = chunky_print(png, left, top + 3, caption, chunky_clr("#FFFFFFDD"))
     end
     png.save(filename, :interlace => true)
