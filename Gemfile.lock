@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    chunky_png (1.4.0)
     discordrb (3.2.1)
       discordrb-webhooks (~> 3.2.0.1)
       opus-ruby
@@ -18,8 +19,7 @@ GEM
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.1)
-    ffi (1.15.5)
-    ffi (1.15.5-x86-mingw32)
+    ffi (1.15.5-x64-mingw32)
     hashie (5.0.0)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
@@ -51,11 +51,7 @@ GEM
       rack
     rbnacl (3.4.0)
       ffi
-    rest-client (2.0.2)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
-    rest-client (2.0.2-x86-mingw32)
+    rest-client (2.0.2-x64-mingw32)
       ffi (~> 1.9)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -67,21 +63,19 @@ GEM
     ruby2_keywords (0.0.5)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.8)
-    unf_ext (0.0.8-x86-mingw32)
+    unf_ext (0.0.8.1-x64-mingw32)
     websocket (1.2.9)
-    websocket-client-simple (0.5.1)
+    websocket-client-simple (0.3.1)
       event_emitter
       websocket
 
 PLATFORMS
-  ruby
-  x86-mingw32
-  x86_64-linux
+  x64-mingw32
 
 DEPENDENCIES
+  chunky_png (~> 1.4)
   discordrb (= 3.2.1)
   rspotify
 
 BUNDLED WITH
-   2.3.8
+   2.3.9

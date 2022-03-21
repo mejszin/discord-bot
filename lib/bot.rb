@@ -8,7 +8,9 @@ Bundler.setup(:default, :ci)
 require 'rest-client'
 require 'discordrb' # https://www.rubydoc.info/gems/discordrb/3.2.1/
 require 'rspotify' # https://www.rubydoc.info/github/guilhermesad/rspotify/
+require 'chunky_png'
 
+require './lib/png.rb'
 require './lib/api/spotify.rb'
 require './lib/objects/task.rb'
 require './lib/objects/task_controller.rb'
@@ -52,9 +54,19 @@ $bot.message(start_with: PREFIX + 'test') do |event|
     #event.respond member.status.inspect
     #event.respond event.message.user.status.inspect
     #event.respond event.server.online_members.inspect
-    event.respond "foo"
-    return
-    event.respond "bar"
+    #event.send_file(File.open(test_png, 'r'), caption: "Image attachment test")
 end
 
 $bot.run
+
+#bot.command :food do |event|
+#
+#    agent = Mechanize.new
+#    link = 'https://source.unsplash.com/random/featured/?Food,Plate'
+#    agent.get(link).save "pic.png" 
+#    event.send_file(File.open('pic.png', 'r'), caption: "Voiçi votre repas #
+#    {event.user.name} .")
+#    sleep(5)
+#    event File.delete("pic.png")
+#
+#end

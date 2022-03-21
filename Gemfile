@@ -6,3 +6,4 @@ source "https://rubygems.org"
 
 gem "discordrb", "3.2.1"
 gem "rspotify"
+gem "chunky_png", "~> 1.4"

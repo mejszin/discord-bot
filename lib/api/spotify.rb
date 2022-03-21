@@ -15,7 +15,7 @@ def auth_spotify
     begin
         RSpotify::authenticate(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
     rescue
-        return "Could not authenticate to Spotify API"
+        return "``Could not authenticate to Spotify API``"
     end
 end
 
@@ -52,7 +52,7 @@ def build_spotify_info_message(str)
     rescue => e
         # Bad track request
         # puts e.message
-        return "Could not identify Spotify track"
+        return "``Could not identify Spotify track for search term \"#{str}\"``"
     end
 end
 
@@ -79,12 +79,12 @@ def build_spotify_track_message(str)
     begin
         # Get track information
         track = get_track(str)
-        return "Could not identify Spotify track" if track == nil
+        return "``Could not identify Spotify track for search term \"#{str}\"``" if track == nil
         return build_track_card(track)
     rescue => e
         # Bad track request
         # puts e.message
-        return "Could not identify Spotify track"
+        return "``Could not identify Spotify track for search term \"#{str}\"``"
     end
 end
 
@@ -95,7 +95,7 @@ def build_spotify_genres
         genres = RSpotify::Recommendations.available_genre_seeds
         return ["```", genres, "```"].compact.join("\n")
     rescue
-        return "Could not authenticate to Spotify API"
+        return "``Could not authenticate to Spotify API``"
     end
 end
 
@@ -110,6 +110,6 @@ def build_spotify_suggestions(genres)
         return output.flatten.join("\n")
     rescue => e
         puts e.message
-        return "Could not authenticate to Spotify API"
+        return "``Could not authenticate to Spotify API``"
     end
 end 

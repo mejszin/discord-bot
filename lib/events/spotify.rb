@@ -13,7 +13,7 @@ $bot.message(start_with: PREFIX + 'spotify') do |event|
             when "gamut"; spotify_gamut()
             else; spotify_track(args.join(" "))
         end
-        event.message.delete
+       # event.message.delete
     rescue => e
         puts e.message
         puts e.backtrace

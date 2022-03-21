@@ -12,16 +12,19 @@ $bot.message(start_with: PREFIX + 'tasks') do |event|
     command = args.shift
     # Case command
     begin
-        event.respond case command
-            when "list"           ; tasks_list(project, args)
-            when "progress"       ; tasks_progress(project)
-            when "add-category"   ; tasks_category_add(user_id, project, *args)
-            when "remove-category"; tasks_category_remove(user_id, project, *args)
-            when "clear-category" ; tasks_category_clear(user_id, project, *args)
-            when "add"            ; tasks_add(user_id, project, args.shift, args.join(" "))
-            when "remove"         ; tasks_remove(user_id, project, *args)
-            when "overwrite"      ; tasks_overwrite(user_id, project, args.shift, args.shift, args.join(" "))
-            when "complete"       ; tasks_complete(user_id, project, *args)
+        case command
+            when "list"           ; event.respond tasks_list(project, args)
+        #   when "progress"       ; event.respond tasks_progress(project)
+            when "add-category"   ; event.respond tasks_category_add(user_id, project, *args)
+            when "remove-category"; event.respond tasks_category_remove(user_id, project, *args)
+            when "clear-category" ; event.respond tasks_category_clear(user_id, project, *args)
+            when "add"            ; event.respond tasks_add(user_id, project, args.shift, args.join(" "))
+            when "remove"         ; event.respond tasks_remove(user_id, project, *args)
+            when "overwrite"      ; event.respond tasks_overwrite(user_id, project, args.shift, args.shift, args.join(" "))
+            when "complete"       ; event.respond tasks_complete(user_id, project, *args)
+            when "progress"
+                response = tasks_progress_image(project)
+                File.file?(response) ? event.send_file(File.open(response, 'r')) : event.respond(response)
             else; format_error("Unknown tasks command \"#{command}\"")
         end
     rescue => e
@@ -68,6 +71,22 @@ def tasks_progress(project_title)
             message << category.ljust(16, " ") + progress_bar + " " + percent
         end
         return ["```", message, "```"].flatten.join("\n")
+    else
+        return format_error("Could not find project!")
+    end
+end
+
+def tasks_progress_image(project_title)
+    project = ProjectController.new.find_project(project_title)
+    if (project != nil) && project.active?
+        message = []
+        # Progress bars
+        percentages = []
+        percentages << ["ALL", project.task_controller.percent_complete.to_f / 100]
+        for category, tasks in project.task_controller.tasks do
+            percentages << [category.upcase, project.task_controller.percent_complete(category).to_f / 100]
+        end
+        return bar_graph_png(percentages)
     else
         return format_error("Could not find project!")
     end
