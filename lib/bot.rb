@@ -1,6 +1,6 @@
 BOT_NAME = 'La Soleil'
 BOT_AVATAR = './data/sunny.png'
-PREFIX = '/'
+PREFIX = '.'
 
 require 'bundler'
 Bundler.setup(:default, :ci)
