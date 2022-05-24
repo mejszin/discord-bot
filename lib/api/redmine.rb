@@ -12,4 +12,4 @@ def redmine_issues(project_id = '9')
     end
 end
 
-redmine_issues
+# redmine_issues
