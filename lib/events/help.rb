@@ -2,7 +2,7 @@ USAGE_FILES = {
     "projects"  => "./usage-projects.txt",
     "tasks"     => "./usage-tasks.txt",
     "changelog" => "./usage-changelog.txt",
-    "spotify"   => "./usage-spotify.txt",
+#   "spotify"   => "./usage-spotify.txt",
     "misc"      => "./usage-misc.txt"
 }
 
